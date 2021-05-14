@@ -43,14 +43,4 @@ txtInput.addEventListener('keyup', ( event ) => {
     }
 });
 
-divTodoList.addEventListener('click', (event) => {
-
-    const nombreElemento = event.target.localName; // Para ver si el seleccionado es un input, label, button
-    const todoElemento = event.target.parentElement.parentElement; // para seleccionar el li
-    const todoId = todoElemento.getAttribute('data-id'); // sacar el valor de data-id
-
-    if ( nombreElemento.includes('input')){ //click en el checkbox
-        todoList.marcarCompletado( todoId );
-        todoElemento.classList.toggle('completed'); //para añadir el tachado a tareas hechas, classList toma todos los elementos, y cambiamos el completed
-    }
-})
+divTodoList.addEventListener('click', (event) => )

@@ -16,11 +16,9 @@ export class TodoList {
     marcarCompletado( id ){
         // la tarea en esta lista de tareas
         for( const todo in this.todos ){
-            // con 2 parentesis porque todo.id puede ser string
+
             if( todo.id == id){
-                // !todo.completado es la negacion del estado actual
-                todo.completado = !todo.completado;
-                break;
+                
             }
         }
     }

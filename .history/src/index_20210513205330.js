@@ -1,7 +1,7 @@
 import './styles.css';
 
 import { Todo, TodoList } from './classes';
-import { crearTodoHtml } from './js/componentes';
+import { crearTodoHtml } from 
 
 export const todoList = new TodoList();
 

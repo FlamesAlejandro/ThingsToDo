@@ -1,6 +1,3 @@
-import { Todo } from '../classes';
-
-import { todoList } from '../index';
 // seleccionar html
 const divTodoList = document.querySelector('.todo-list');
 const txtInput = document.querySelector('.new-todo');
@@ -33,24 +30,4 @@ export const crearTodoHtml = ( todo ) =>{
 
 txtInput.addEventListener('keyup', ( event ) => {
 
-    if ( event.keyCode === 13 && txtInput.value.length > 0 ){
-        
-        const nuevoTodo = new Todo( txtInput.value );
-        todoList.nuevoTodo( nuevoTodo );
-
-        crearTodoHtml( nuevoTodo );
-        txtInput.value = "";
-    }
 });
-
-divTodoList.addEventListener('click', (event) => {
-
-    const nombreElemento = event.target.localName; // Para ver si el seleccionado es un input, label, button
-    const todoElemento = event.target.parentElement.parentElement; // para seleccionar el li
-    const todoId = todoElemento.getAttribute('data-id'); // sacar el valor de data-id
-
-    if ( nombreElemento.includes('input')){ //click en el checkbox
-        todoList.marcarCompletado( todoId );
-        todoElemento.classList.toggle('completed'); //para añadir el tachado a tareas hechas, classList toma todos los elementos, y cambiamos el completed
-    }
-})

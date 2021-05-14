@@ -51,6 +51,6 @@ divTodoList.addEventListener('click', (event) => {
 
     if ( nombreElemento.includes('input')){ //click en el checkbox
         todoList.marcarCompletado( todoId );
-        todoElemento.classList.toggle('completed'); //para añadir el tachado a tareas hechas, classList toma todos los elementos, y cambiamos el completed
+        todoElemento.classList.toggle('completed'); 
     }
 })

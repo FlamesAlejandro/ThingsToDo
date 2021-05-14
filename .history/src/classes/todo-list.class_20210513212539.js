@@ -20,7 +20,6 @@ export class TodoList {
             if( todo.id == id){
                 // !todo.completado es la negacion del estado actual
                 todo.completado = !todo.completado;
-                break;
             }
         }
     }
