@@ -1,0 +1,103 @@
+import { Todo } from '../classes';
+
+import { todoList } from '../index';
+// seleccionar html
+const divTodoList           = document.querySelector('.todo-list');
+const txtInput              = document.querySelector('.new-todo');
+const btnBorrarCompletado   = document.querySelector('.clear-completed');
+const ulFilters             = document.querySelector('.filters');
+const archonFiltro          = document.querySelectorAll('.filtro');
+
+export const crearTodoHtml = ( todo ) =>{
+
+    // crear html
+    const htmlTodo = `
+        <li class="${ (todo.completado) ? 'completed' : '' }" data-id="${ todo.id }">
+            <div class="view">
+                <input class="toggle" type="checkbox" ${ (todo.completado) ? 'checked' : '' }>
+                <label>${ todo.tarea }</label>
+                <button class="destroy"></button>
+            </div>
+            <input class="edit" value="Create a TodoMVC template">
+        </li>
+    `;
+
+    // crear elemento div que contendra el html
+    const div = document.createElement('div');
+    div.innerHTML = htmlTodo;
+
+    // unir html al elemento html seleccionado, first element child para que tome el primer div del html, y siga desde ahi
+    divTodoList.append( div.firstElementChild );
+    
+    return div.firstElementChild;
+}
+
+// Eventos
+
+txtInput.addEventListener('keyup', ( event ) => {
+
+    if ( event.keyCode === 13 && txtInput.value.length > 0 ){
+        
+        const nuevoTodo = new Todo( txtInput.value );
+        todoList.nuevoTodo( nuevoTodo );
+
+        crearTodoHtml( nuevoTodo );
+        txtInput.value = "";
+    }
+});
+
+divTodoList.addEventListener('click', (event) => {
+
+    const nombreElemento = event.target.localName; // Para ver si el seleccionado es un input, label, button
+    const todoElemento = event.target.parentElement.parentElement; // para seleccionar el li
+    const todoId = todoElemento.getAttribute('data-id'); // sacar el valor de data-id
+
+    if ( nombreElemento.includes('input')){ //click en el checkbox
+        todoList.marcarCompletado( todoId );
+        todoElemento.classList.toggle('completed'); //para añadir el tachado a tareas hechas, classList toma todos los elementos, y cambiamos el completed
+    
+    } else if( nombreElemento.includes('button')) { // click en la X para borrar 
+        todoList.eliminarTodo( todoId ); // eliminar de la lista
+        divTodoList.removeChild( todoElemento ); // eliminar el html
+
+    }
+})
+
+btnBorrarCompletado.addEventListener('click', (event) => {
+    todoList.eliminarCompletado(); // borrar de la lista
+    //borrar del html, va ser un ciclo for, pero sera inverso para evitar borrar algo irroneo debido que puede cambiar el indice de los otros donde uno va borrando
+    for( let i = divTodoList.children.length-1 ; i>=0 ; i--){
+
+        const elemento = divTodoList.children[i]; 
+
+        if( elemento.classList.contains('completed')){ // solo completados
+            divTodoList.removeChild(elemento);
+        }
+    }
+
+});
+
+ulFilters.addEventListener('click', (event) => {
+    // clase de la etiqueta seleccionada
+    const filtro = event.target.text;
+    if( !filtro ){ return; } // caso null
+
+    archonFiltro.forEach( elem => elem.classList.remove( 'selected' ) ); // remover el selected a todos
+    event.target.classList
+
+    for( const elemento of divTodoList.children ){ // por cada elemento en el UL
+        elemento.classList.remove('hidden'); //remover el hidden de todos
+        const completado = elemento.classList.contains('completed');
+
+        switch( filtro ) {
+            case 'Pendientes':
+                if( completado ){ elemento.classList.add( 'hidden' ) };
+                break;
+            case 'Completados':
+                if( !completado ){ elemento.classList.add( 'hidden' ) };
+                break;
+            
+        }
+    }
+});
+
