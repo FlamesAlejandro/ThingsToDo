@@ -6,7 +6,7 @@ export class TodoList {
         this.cargarLocalStorage();
     }
 
-    nuevoTodo( todo ) {
+    nuevoTodo() {
         this.todos.push( todo );
         this.guardarLocalStorage();
     }
@@ -43,7 +43,7 @@ export class TodoList {
     cargarLocalStorage(){
         // si retorna algo, guardarlo pasandolo a objeto con json parse, else hacer un objeto nuevo vacio
         this.todos = (localStorage.getItem('todo') ) 
-            ? JSON.parse( localStorage.getItem('todo') ) 
+            ? JSON.parse( localStorage.getItem('todo' ) ) 
             : [];
         // esos objetos no son parte de la clase todo, entonces los recrearemos en la clase, usando el .map que devuelve un arreglo mutado
         this.todos = this.todos.map( Todo.fromJson );

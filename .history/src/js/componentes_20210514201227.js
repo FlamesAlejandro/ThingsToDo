@@ -39,7 +39,7 @@ txtInput.addEventListener('keyup', ( event ) => {
     if ( event.keyCode === 13 && txtInput.value.length > 0 ){
         
         console.log(txtInput.value);
-        console.log(event.keyCode);
+        console.log(event)
         const nuevoTodo = new Todo( txtInput.value );
         todoList.nuevoTodo( nuevoTodo );
 

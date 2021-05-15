@@ -6,7 +6,7 @@ export class TodoList {
         this.cargarLocalStorage();
     }
 
-    nuevoTodo( todo ) {
+    nuevoTodo() {
         this.todos.push( todo );
         this.guardarLocalStorage();
     }

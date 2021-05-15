@@ -6,5 +6,5 @@ import { crearTodoHtml } from './js/componentes';
 export const todoList = new TodoList();
 
 //cargar los todo en el html
-todoList.todos.forEach( crearTodoHtml );
+TodoList.todos.forEach( todo => crearTodoHtml);
 // lo mismo ( todo => crearTodoHtml( todo ) );
